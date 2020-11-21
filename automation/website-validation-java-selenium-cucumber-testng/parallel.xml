@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel" thread-count="2" parallel="tests">
+    <test name="TestChrome">
+        <parameter name="environment" value="chrome"/>
+        <classes>
+            <class name="main.CucumberRunner"/>
+        </classes>
+    </test>
+
+    <test name="TestFirefox">
+        <parameter name="environment" value="firefox"/>
+        <classes>
+            <class name="main.CucumberRunner"/>
+        </classes>
+    </test>
+
+</suite>
+
+    <!--        <packages>-->
+<!--            <package name="main"/>-->
+<!--        </packages>-->

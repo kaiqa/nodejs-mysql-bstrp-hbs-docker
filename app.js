@@ -31,5 +31,5 @@ app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
 app.listen(8080, () => {
-  console.log("listening on port 80");
+  console.log("listening on port 8080");
 })

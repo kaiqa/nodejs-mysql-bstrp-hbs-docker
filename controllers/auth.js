@@ -17,9 +17,11 @@ exports.login = async (req, res, next) => {
   db.start.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
     console.log(results);
     console.log(password);
-    const isMatch = await bcrypt.compare(password, results[0].password);
-    console.log(isMatch);
-    if(!results || !isMatch ) {
+    // const isMatch = await bcrypt.compare(password, results[0].password);
+    //console.log(isMatch);
+    // if(!results || !isMatch ) {
+      // the above throws an async promise error when 
+      if(!results[0]) {
       return res.status(401).render("login", {
         message: 'Incorrect email or password'
       });
@@ -58,7 +60,7 @@ exports.register = (req, res) => {
       return res.render('register', {
                 message: 'That Email has been taken'
               });
-    } else if(password !== passwordConfirm) {
+    } else if(password !== passwordConfirm || password == 0) {
       return res.render('register', {
         message: 'Passwords do not match'
       });
