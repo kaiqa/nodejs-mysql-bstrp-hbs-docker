@@ -41,4 +41,9 @@ public class LoginPage extends CucumberRunner {
     return  driver.getTitle().toString();
     }
 
+    //Get the url from the Login Page
+    public String getCurrentUrl(){
+        return  driver.getCurrentUrl().toString();
+    }
+
 }

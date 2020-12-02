@@ -79,7 +79,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 	}
 
 	public void openBrowser(String environment) throws Exception {
-		System.out.println("inside openbrowser passed as :- " + environment);
+		System.out.println("inside openbrowser passed as : " + environment);
 		// loads the config options
 		LoadConfigProperty();
 		// configures the driver path
@@ -87,6 +87,8 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
 		if (environment.equals("firefox")) {
 			driver = new FirefoxDriver();
+			long id = Thread.currentThread().getId();
+			System.out.println("Before test-method. Thread id is: " + id);
 		} else if (environment.equals("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			// options.addArguments("--headless");
@@ -95,6 +97,8 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 			options.addArguments("--disable-dev-shm-usage");
 			options.setExperimentalOption("useAutomationExtension", false);
 			driver = new ChromeDriver(options);
+			long id = Thread.currentThread().getId();
+			System.out.println("Before test-method. Thread id is: " + id);
 		}
 //		if (config.getProperty("browserType").equals("firefox")) {
 //			driver = new FirefoxDriver();
@@ -143,12 +147,23 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 		return cal1;
 	}
 
+
+	String testName = "";
+
+	@BeforeTest
+	@Parameters({ "environment" })
+	public void beforeTest(String testName) {
+		this.testName = testName;
+		long id = Thread.currentThread().getId();
+		System.out.println("Before test " + testName + ". Thread id is: " + id);
+	}
+
 	// @BeforeSuite(alwaysRun = true)
 	@BeforeMethod(alwaysRun = true)
 	@org.testng.annotations.Parameters(value = { "environment" })
 	@SuppressWarnings("unchecked")
 	public void setUp( @Optional("chrome") String environment) throws Exception {
-		System.out.println("passed as :- " + environment);
+		System.out.println("passed as :  " + environment);
 		openBrowser(environment);
 		maximizeWindow();
 		implicitWait(30);
@@ -179,13 +194,16 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 
 			synchronized (driver)
 			{driver.quit();}
-			System.out.println("after method browser quit");
+			System.out.println("after method synchronized browser quit");
 		}else {
 			{driver.quit();}
-			System.out.println("after method browser quit");
+			System.out.println("after method failed else browser quit");
+			System.out.println(result.getParameters());
+	//		ReportHelper.generateCucumberReport();
 		}
 
 	}
+
 	@AfterSuite(alwaysRun=true)
 	public void generateHTMLReports() {
 		ReportHelper.generateCucumberReport();

@@ -9,11 +9,12 @@ import net.masterthought.cucumber.*;
 public class ReportHelper {
 
     public static void generateCucumberReport() {
+
         File reportOutputDirectory = new File("target");
         ArrayList<String> jsonFiles = new ArrayList<String>();
         jsonFiles.add("target/cucumber.json");
 
-        String projectName = "testng-cucumber";
+        String projectName = "testng-cucumber kaiqa";
 
         Configuration configuration = new Configuration(reportOutputDirectory, projectName);
         configuration.addClassifications("Platform", System.getProperty("os.name"));

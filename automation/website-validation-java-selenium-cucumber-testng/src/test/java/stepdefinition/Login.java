@@ -20,11 +20,14 @@ public Login(){
 
 	@Given("^I am on the login page$")
 	public void I_am_on_the_login_page() throws Throwable{
+
 		String title = loginPage.getPageTitle();
 		String	baseUrl = config.getProperty("siteUrl");
-		System.out.println(driver.getCurrentUrl());
-		driver.navigate().to(baseUrl + "login" );
-		Assert.assertEquals(title, baseUrl);
+		System.out.println(baseUrl + "login");
+		driver.get(baseUrl + "login");
+		// driver.get("http://kaiqa.duckdns.org/login");
+	//	Thread.sleep(2000);
+	//	Assert.assertEquals(currentUrl, baseUrl);
 	}
 
 	@Then("^I fill in the login page login form email field with \"([^\"]*)\"$")
@@ -46,6 +49,8 @@ public Login(){
 		String pageTitle = loginPage.getPageTitle();
 		Assert.assertEquals(pageTitle, title);
 	}
+
+
 
 }
 

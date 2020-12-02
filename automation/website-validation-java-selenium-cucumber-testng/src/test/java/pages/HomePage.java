@@ -18,6 +18,10 @@ public class HomePage extends CucumberRunner {
     @FindBy(xpath="//html/body/div[6]/section/section[3]/div/section[2]/p/button")
     public WebElement  homePageLoginFormSButtonCreateAccount;
 
+    @FindBy(className="display-4")
+    public WebElement homePageGreetingText;
+
+
     public HomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);

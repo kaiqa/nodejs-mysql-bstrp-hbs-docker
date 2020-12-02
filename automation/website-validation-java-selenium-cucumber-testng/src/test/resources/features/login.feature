@@ -7,3 +7,4 @@ Feature: Login
     Then  I fill in the login page login form email field with "kai@kai.com"
     And   I fill in the login page login form password field with "x"
     Then  I click on the login page login form button login
+    And   I see the home page greeting text "Hello, kai"

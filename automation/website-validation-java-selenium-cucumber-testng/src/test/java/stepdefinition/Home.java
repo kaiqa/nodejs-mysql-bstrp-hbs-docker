@@ -42,6 +42,13 @@ public Home(){
 		String pageTitle = homePage.getHomePageTitle();
 		Assert.assertEquals(pageTitle, title);
 	}
+
+	@Then("^I see the home page greeting text \"([^\"]*)\"$")
+	public void i_see_the_home_page_greeting_text(String arg1) throws Throwable {
+		String greetingText = homePage.homePageGreetingText.getText();
+		Assert.assertEquals(greetingText, arg1 );
+	}
+
 	@Then("^I navigate back$")
 	public void i_navigate_back() throws Throwable {
 		driver.navigate().back();

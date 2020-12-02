@@ -13,12 +13,10 @@ This is demo code bootstrap code with basic happy path test automation
  * 2.2 Log into the website
  * 2.3   Create first collection
  * 2.3.1 User should be logged in
- * 2.3.2 Press on Explore Rijksstudio (magnifying glass) on the top menu and
-                  search for “Johannes Vermmer”
+ * 2.3.2 Press on Explore
                   
- * 2.3.3 Press the heart icon displayed at the bottom of the “The Milkmaid” picture and
- add it to your first collection.
- *  2.4 Advanced search to look for a specific author
+ * 2.3.3 Press the heart icon 
+ * 2.4 Advanced search to look for a specific author
  * Verify pictures are displayed
  * Snapshot on a failed test.
  
@@ -30,7 +28,7 @@ This is demo code bootstrap code with basic happy path test automation
 * Dry step definition and no hard coded logic 
 
 ## Random issues
-* The login button is protected by capture module 
+ 
 * The advanced search form loses field entries on backend connection failure and does not recover.
 * Test site unresponsive
 ![report2](./images/down.png)
