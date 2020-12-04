@@ -24,6 +24,7 @@ public Login(){
 		String title = loginPage.getPageTitle();
 		String	baseUrl = config.getProperty("siteUrl");
 		System.out.println(baseUrl + "login");
+		Thread.sleep(2000);
 		driver.get(baseUrl + "login");
 		// driver.get("http://kaiqa.duckdns.org/login");
 	//	Thread.sleep(2000);
@@ -43,6 +44,13 @@ public Login(){
 	public void I_click_on_the_home_page_login_form_button_login() throws Throwable{
 		loginPage.loginPageLoginFormFieldButtonLogin.click();
 	}
+
+	@Then("^I see the login page wrong password alert message \"([^\"]*)\"$")
+	public void i_see_the_login_page_wrong_password_alert_message(String arg1) throws Throwable {
+		String alertText = loginPage.loginPageAlertTextPasswordInvalid.getText();
+		Assert.assertEquals(alertText, arg1 );
+	}
+
 
 	@Then("^I see the login page title \"([^\"]*)\"$")
 	public void i_see_the_title(String title) throws Throwable {
