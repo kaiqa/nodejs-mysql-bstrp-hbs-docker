@@ -18,31 +18,40 @@ exports.login = async (req, res, next) => {
     console.log(results);
     console.log(password);
     // const isMatch = await bcrypt.compare(password, results[0].password);
-    //console.log(isMatch);
+    // console.log(isMatch);
     // if(!results || !isMatch ) {
       // the above throws an async promise error when 
+     
       if(!results[0]) {
       return res.status(401).render("login", {
         message: 'Incorrect email or password'
       });
-    } else {
-      // 3) If everything ok, send token to client
-      const id = results[0].id;
-      console.log(id);
-      const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-      });
-
-      const cookieOptions = {
+    } 
+    
+    else  { 
+      const isMatch = await bcrypt.compare(password, results[0].password);
+      console.log(' password match = ' + isMatch)
+      if (isMatch == true){
+       // 3) If everything ok, send token to client
+       const id = results[0].id;
+       console.log(id);
+       const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+       expiresIn: process.env.JWT_EXPIRES_IN });
+       const cookieOptions = {
         expires: new Date(
           Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
         httpOnly: true
-      };
+                    };
       res.cookie('jwt', token, cookieOptions);
-
       res.status(200).redirect("/");
     }
+          }
+     console.log('password invalid');
+     return res.status(401).render("login", {
+      message: 'Incorrect email or password'
+    });
+      
   });
 };
 

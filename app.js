@@ -20,6 +20,7 @@ app.use(express.static(publicDirectoryPath));
 
 db.start.connect(function(err) {
   if(err) {
+    console.log(err);
     console.log('Error connecting to the database');
   } else {
     console.log('Connected to MYSQL');
@@ -30,6 +31,6 @@ db.start.connect(function(err) {
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
-app.listen(8080, () => {
-  console.log("listening on port 8080");
+app.listen(80, () => {
+  console.log("listening on port 80");
 })

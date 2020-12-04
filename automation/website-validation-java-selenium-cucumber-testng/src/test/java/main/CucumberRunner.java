@@ -91,11 +91,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 			System.out.println("Before test-method. Thread id is: " + id);
 		} else if (environment.equals("chrome")) {
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			options.addArguments("--ignore-certificate-errors");
-			options.addArguments("--disable-popup-blocking");
-			options.addArguments("--incognito");
-			options.addArguments("--allow-insecure-localhost");
+			// options.addArguments("--headless");
 			options.addArguments("--disable-gpu");
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
@@ -150,6 +146,8 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 		String cal1 = dateFormat.format(cal.getTime());
 		return cal1;
 	}
+
+
 	String testName = "";
 
 	@BeforeTest
@@ -169,7 +167,6 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 		openBrowser(environment);
 		maximizeWindow();
 		implicitWait(30);
-		pageLoad(5);
 		deleteAllCookies();
 		setEnv();
 	}

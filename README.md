@@ -1,5 +1,10 @@
 
-## Setup:
+## Setup node:
+brew update --verbose
+brew install node
+npm -v
+node -v
+
 npm init -v
 npm i express mysql dotenv hbs
 npm i --save nodemon
@@ -9,33 +14,46 @@ npm i cookie-parser jsonwebtoken
 
 
 ## Open terminal and Run docker containers with docker compose:
+    cd /docker
     docker-compose up -d
 
 ## phpMyAdmin: 
 ### PHPADMIN:
-### http://localhost:8183/sql.php?db=nodejs-login&table=users&pos=0
+#### Where root as your user localhost as your URL and PASSWORD as your password
+1. Navigate to:  http://localhost:8183/sql.php?db=nodejs-login&table=users&pos=0
+2. Fill in credentials:
+        Server: mysql
+        Username: root
+        Password: root
 
-    http://localhost:8183/
-    Server: mysql
-    Username: root
-    Password: root
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
-
-Where root as your user localhost as your URL and password as your password
-
-Then run this query to refresh privileges:
-flush privileges;
-
-If that doesn't work, try it without @'localhost' part.
-ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'password'
+3. Select the database mysql
+4. Click on tab SQL
+Change user security and set new password:
+5. Fill in: ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password'
+6. Click on button: Go
+7. Fill in: flush privileges;
+8. Click on button: Go
 
 ## create database:
-nodejs-login
+1. Click on: new
+2. Fill in: nodejs-login
+3. Click on button: Create
+## import database dump
+1. Click on tab: import
+2. Click on button: Choose file
+3. Select: /dumbs/nodejs-login.sql
+4. Click on button: Go
+## create tables by hand:
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `user-type` varchar(100) NOT NULL DEFAULT 'registered',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-## create tables:
-name: users number of columns: 4 
-CREATE TABLE `nodejs-login`. ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `email` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+Alter table users ADD(user_type Varchar(10) Default 'registered');
 
 
 ## Access mysql on terminal:
@@ -55,3 +73,11 @@ Docker phpmyadmin ENV:
 PMA_ARBITRARY	when set to 1 connection to the arbitrary server will be allowed
 PPMA_HOST	define address/host name of the MySQL server
 PMA_PORT	define port of the MySQL server
+
+## docker notes:
+One liner to stop / remove all of Docker containers:
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+ docker-compose up -d
