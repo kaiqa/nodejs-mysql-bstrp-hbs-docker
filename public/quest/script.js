@@ -13,8 +13,6 @@ function changeRoom(dir) {
         $('#game-text').append("<p>You cannot go that way!</p>");
         say("You cannot go that way!");
     }
-
-
 }
 
 function showHelp() {
@@ -65,7 +63,7 @@ function playerInput(input) {
         case "l":
            // say(rooms[currentRoom].name);
             say(rooms[currentRoom].escriptiones);
-            say(rooms[currentRoom].description);
+          //  say(rooms[currentRoom].description);
             break;
         default:
                 createjs.Sound.play("error");
@@ -227,6 +225,5 @@ $(document).ready(function() {
             playerInput(value);
         }
     })
-
 
 })
