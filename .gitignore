@@ -1,5 +1,8 @@
 /node_modules
 /pdf
+/cert
 .env
 .DS_Store
 .pdf
+.cert
+.key
