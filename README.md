@@ -81,3 +81,18 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
  docker-compose up -d
+
+## certificate for https letsencrypt
+https://certbot.eff.org/lets-encrypt/osx-other
+
+brew install certbot
+sudo certbot certonly --standalone
+
+Copy the certs to the nodejs folder cert.
+
+Example: sudo cp /etc/letsencrypt/live/kaiqa.duckdns.org/cert.pem ~/Development/kaiqa-github/nodejs-mysql-bstrp-hbs-docker
+ 
+cert = /etc/letsencrypt/live/kaiqa.duckdns.org/cert.pem
+privkey = /etc/letsencrypt/live/kaiqa.duckdns.org/privkey.pem
+chain = /etc/letsencrypt/live/kaiqa.duckdns.org/chain.pem
+fullchain = /etc/letsencrypt/live/kaiqa.duckdns.org/fullchain.pem

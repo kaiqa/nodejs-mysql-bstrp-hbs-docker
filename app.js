@@ -4,14 +4,22 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const fs = require('fs');
-const options = {
-  key: fs.readFileSync('./cert/localhost.key'),
-  cert: fs.readFileSync('./cert/localhost.cert')
+
+const privateKey = fs.readFileSync('./cert/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('./cert/cert.pem', 'utf8');
+const ca = fs.readFileSync('./cert/fullchain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
 };
+
 var https = require('https');
 var http = require('http');
-var servHttps = https.createServer(options, app);
-var servHttp = http.createServer(options, app);
+// 
+var servHttps = https.createServer(credentials, app);
+var servHttp = http.createServer(credentials, app);
 
 
 dotenv.config({ path: './.env' });
@@ -41,12 +49,9 @@ db.start.connect(function(err) {
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 
-servHttps.listen(8443, () => {
-  console.log("listening on port 8443");
+servHttps.listen(443, () => {
+  console.log("listening on port 443");
 })
-servHttp.listen(8080, () => {
-  console.log("listening on port 8080 ");
+servHttp.listen(80, () => {
+  console.log("listening on port 80 ");
 })
-// app.listen(8080, () => {
-//   console.log("listening on port 8080");
-// })
