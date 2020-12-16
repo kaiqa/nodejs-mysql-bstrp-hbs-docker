@@ -1,4 +1,5 @@
 const express = require('express');
+const debug = require('debug')('express');
 const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -40,8 +41,10 @@ db.start.connect(function(err) {
   if(err) {
     console.log(err);
     console.log('Error connecting to the database');
+    debug('Error connecting to the database');
   } else {
     console.log('Connected to MYSQL');
+    debug('Connected to MYSQL');
   }
 });
 
@@ -51,7 +54,9 @@ app.use('/auth', require('./routes/auth'));
 
 servHttps.listen(443, () => {
   console.log("listening on port 443");
+  debug("listening on port 443");
 })
 servHttp.listen(80, () => {
   console.log("listening on port 80 ");
+  debug("listening on port 80");
 })
