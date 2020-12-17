@@ -1,7 +1,8 @@
 /node_modules
 /pdf
 /cert
-/games
+/public/games/neofighter8
+/public/games/jfighter
 .env
 .DS_Store
 .pdf
