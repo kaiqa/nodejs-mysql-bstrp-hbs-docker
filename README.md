@@ -116,9 +116,12 @@ fullchain = /etc/letsencrypt/live/kaiqa.duckdns.org/fullchain.pem
 # npm2
 ## install with npm
     npm i -g pm2
-##  run with pm2
-    pm2 start app.js --name homepage
+##  run homepage with pm2
+    pm2 start app.js --watch --name webapp
+##  run video call app from inside the folder video-call-WebRTC
+   pm2 start ./server.js --watch --name videocall 
 ### usefull commands
       pm2 monit
+      pm2 logs
       pm2 stop all
       pm2 delete all

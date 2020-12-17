@@ -1,0 +1,13 @@
+{
+    "apps": [
+        {
+            "name": "homepage",
+            "cwd": "/Users/kai/Development/kaiqa-github/nodejs-mysql-bstrp-hbs-docker",
+            "script": "app.js",
+            "watch": "true",
+            "env": {
+                "DEBUG": "express"
+            }
+        }
+    ]
+}

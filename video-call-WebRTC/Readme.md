@@ -11,6 +11,6 @@ npm run devStart
 install peer:
 npm i -g peer
 
-runt peer in seperate terminal:
+run peer in seperate terminal:
 cd cert
 peerjs --sslkey localhost.key --sslcert localhost.cert  --port 3001
