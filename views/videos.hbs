@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+  <title>Videos</title>
+</head>
+<body>
+  <nav>
+    <h2>Videos</h2>
+    <ul>
+      <li><a class="btn btn-primary btn-lg" href="/" role="button">Home</a></li>
+    </ul>
+  </nav>
+{{#if user}}
+<p id="demo"></p>
+
+<div class="container mt-4">
+    <div class="jumbotron">
+  <div class="text-center">
+    <h1>24122020 skatin </h1>
+    <img src="https://kaiqa.duckdns.org/images/24122020 skatin.png" alt="camper video" class="img-thumbnail"></div>
+  <div class="text-center"> 
+    <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/9bM_osRHXI0" data-target="#myModal"> PLAY </button>
+    </div>
+</div> 
+
+  <div class="container mt-4">
+    <div class="jumbotron">
+  <div class="text-center">
+    <h1>camper</h1>
+    <img src="https://kaiqa.duckdns.org/images/camper-video.png" alt="camper video" class="img-thumbnail"></div>
+  <div class="text-center"> 
+    <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/N_rYWWZsIQk" data-target="#myModal"> PLAY </button>
+    </div>
+</div> 
+
+<div class="container mt-4">
+  <div class="jumbotron">>
+  <div class="text-center"> 
+    <h1>bath</h1>
+    <img src="https://kaiqa.duckdns.org/images/bath.png" alt="camper video" class="img-thumbnail"></div>
+  <div class="text-center"> 
+    <button type="button" class="btn btn-primary video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/bm-tY3rck3o" data-target="#myModal"> PLAY </button>
+    </div>
+</div> 
+
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/yPu6qV5byu4" allowfullscreen></iframe>
+  </div>
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4HuAnM6b2d8" allowfullscreen></iframe>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+  <div class="modal-body">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    <!-- 16:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="" id="video"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+  </div>
+
+    </div>
+    </div>
+  </div>
+
+</div>
+      {{else}}
+      
+        <h1 class="display-4">please login</h1>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+        </p>
+      
+{{/if}}
+
+<script>
+
+  function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+        else {
+          console.log('error reading file ');
+        }
+    }
+    rawFile.send(null);
+}
+
+//usage:
+readTextFile("http://kaiqa.duckdns.org/videos/data.json", function(text){
+    var data = JSON.parse(text);
+    console.log(data);
+    document.getElementById("demo").innerHTML = data[0] + ", " + data[1];
+});
+
+$(document).ready(function() {
+// Gets the video src from the data-src on each button
+var $videoSrc;  
+$('.video-btn').click(function() {
+    $videoSrc = $(this).data( "src" );
+});
+console.log($videoSrc);
+
+// when the modal is opened autoplay it  
+$('#myModal').on('shown.bs.modal', function (e) {
+
+// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
+})
+// stop playing the youtube video when I close the modal
+$('#myModal').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#video").attr('src',$videoSrc); 
+}) 
+// document ready  
+});
+
+</script>
+</body>
+</html>

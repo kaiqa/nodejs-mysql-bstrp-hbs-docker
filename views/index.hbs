@@ -1,68 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="./style.css">
-
-  <title>http://kaiqa.duckdns.org/</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./style.css">
+<title>http://kaiqa.duckdns.org/</title>
 </head>
 <body>
   <nav>
     <h2>Home</h2>
     <ul>
-      <li><a href="/">Home</a></li>
-      {{#if user}}
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
-      {{else}}
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-      {{/if}}
+    {{!-- <li><a href="/">Home</a></li> --}}
+    {{#if user}}
+    <li><a class="btn btn-primary btn-lg" href="/profile" role="button">Profile</a></li>
+    {{else}}       
+    <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+    <a class="btn btn-primary btn-lg" href="/register" role="button">Register</a>
+    {{/if}}
     </ul>
   </nav>
- 
- <div class = "container mt-4">
-        <div class="jumbotron">
+  <div class = "container mt-4">
+    <div class="jumbotron">
     {{#if user.name}}
-    <span class="border border-white">
-    <img src="/images/logo.png" alt="..." class="rounded-circle">
-    </span>
+    <h1 class="display-4">Hello, {{user.name}}</h1> 
+    <li><a href="/videos">Videos</a></li>
+    <li><a href="/games">Games</a></li>
+    </div>
+{{!-- content when logged in --}}
+<div class = "container mt-4">
+  <div class="jumbotron">
+  <p>beastyboys-make-some-noise</p>
 
-       <h1 class="display-4">Hello, {{user.name}}</h1>   
+  <img src="/audio/bb.png" alt="" width="150" height="150">
+    <audio controls>
+    <source src="/audio/beastyboys-make-some-noise.mp3" type="audio/ogg">
+    Your browser does not support the audio element.
+    </audio>
 
-       <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/yPu6qV5byu4" allowfullscreen></iframe>
-        </div>
-        
-        <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4HuAnM6b2d8" allowfullscreen></iframe>
-        </div>
-
-
-          
-
-      {{else}}
-        <h1 class="display-4">Hello, please login</h1>
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
-        </p>
-      
-    {{/if}}
-  
-  
+  </div>
 </div>
- 
 
+{{!-- content when logged in END --}}
+    {{else}}
+    <h1><span>I am&nbsp;</span><span class="text"></span><span class="cursor">|</span></h1>
+    {{/if}}
+</div>
+
+<script>
+  $(function() {
+	var message = {
+
+		message: [
+    'dreaming.', 
+    'thinking.'
+		],
+		counterS: 0,
+		counterL: 0,
+		deleteS: false,
+
+		init: function() {
+    this.cacheElem();
+    this.type();
+		},
+
+		cacheElem: function() {
+    this.$text = $('.text');
+		},
+
+		type: function() {
+    var message 	= this.message[this.counterS],
+    that 	    = this,
+    speed 	  = 0;
+
+    message = !this.deleteS ? message.slice(0, ++this.counterL) : message.slice(0, --this.counterL);
+    if(this.message[this.counterS] != message && !this.deleteS) {
+    this.$text.text(message);
+    speed = 90;
+    }
+    else {
+    this.deleteS = true;
+    speed = this.message[this.counterS] == message ? 1000 : 40;
+    this.$text.text(message);
+    if (message == '') {
+    this.deleteS = false;
+    this.counterS = this.counterS < this.message.length - 1 ? this.counterS + 1 : 0;
+    }
+    }
+    setTimeout(function(){that.type()}, speed);
+		}
+	};
+	message.init();
+});
+
+
+</script>
 </body>
 </html>

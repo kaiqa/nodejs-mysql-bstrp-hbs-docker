@@ -15,26 +15,23 @@
 
     <link rel="stylesheet" href="/style.css">
 
-  <title>Document</title>
+  <title>Login</title>
 </head>
 <body>
+    
   <nav>
     <h2>Login</h2>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/register">Register</a></li>
+  <ul>
+    <a class="btn btn-primary btn-lg" href="/" role="button">Home</a>
     </ul>
   </nav>
 
   <div class = "container mt-4">
         <div class="card">
             <div class="card-header">
-                Login Form
             </div>
             <div class="card-body">
-             <form action="/auth/login" method="POST">
-
+            <form action="/auth/login" method="POST">
             <div class="form-group">      
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
