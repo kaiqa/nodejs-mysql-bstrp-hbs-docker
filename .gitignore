@@ -3,6 +3,12 @@
 /cert
 /public/games/neofighter8
 /public/games/jfighter
+/public/audio
+/public/videos
+/public/images
+/public/fonts
+/public/private
+/public/icons
 .env
 .DS_Store
 .pdf
