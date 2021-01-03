@@ -8,7 +8,6 @@
 /public/images
 /public/fonts
 /public/private
-/public/icons
 .env
 .DS_Store
 .pdf
