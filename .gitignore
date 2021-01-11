@@ -8,6 +8,7 @@
 /public/images
 /public/fonts
 /public/private
+/trayapp/node_modules
 .env
 .DS_Store
 .pdf
