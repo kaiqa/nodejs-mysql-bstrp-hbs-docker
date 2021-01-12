@@ -1,0 +1,23 @@
+{
+    "name": "QATT",
+    "version": "1.0.0",
+    "description": "kaiqa tray tool",
+    "files": [
+        "/assets",
+        "/icons"
+    ],
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-packager . TrayApp --icon=./icons/alien-outlineTemplate.png",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "kai",
+    "license": "ISC",
+    "dependencies": {
+        "electron": "^11.1.1",
+        "electron-is": "^3.0.0",
+        "electron-packager": "^15.2.0",
+        "pm2": "^4.5.1"
+    }
+}
