@@ -9,6 +9,7 @@
 /public/fonts
 /public/private
 /trayapp/node_modules
+/video-call-WebRTC/cert
 .env
 .DS_Store
 .pdf
