@@ -10,6 +10,7 @@
 /public/private
 /trayapp/node_modules
 /video-call-WebRTC/cert
+/video-call-WebRTC/cert/localhost.cert
 .env
 .DS_Store
 .pdf
