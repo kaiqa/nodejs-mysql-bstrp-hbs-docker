@@ -6,7 +6,7 @@ create a key in the cert folder:
 openssl req -new -x509 -key localhost.key -out localhost.cert -days
 
 run the build:
-npm run devStart
+npm run start
 
 install peer:
 npm i -g peer
