@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
                     httpOnly: true
                 };
                 res.cookie('jwt', token, cookieOptions);
-                exec("say user is logged  in");
+                exec("say logged in user with email " + email);
                 res.status(200).redirect("/");
             }
         }
@@ -100,7 +100,6 @@ exports.register = (req, res) => {
                         httpOnly: true
                     };
                     res.cookie('jwt', token, cookieOptions);
-                    exec("say new user registered");
                     res.status(201).redirect("/");
                 });
             }
