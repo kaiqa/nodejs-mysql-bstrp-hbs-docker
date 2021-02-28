@@ -61,6 +61,14 @@ servHttp.listen(80, () => {
     console.log("listening on port 80 ");
     debug("listening on port 80");
 })
+
+app.post('/bell', (req, res) => {
+    const click = { clickTime: new Date() };
+    console.log('click');
+    exec("say ring ring");
+    res.sendStatus(201);
+})
+
 // read files
 var directoryPath = './public/audio';
 //passsing directoryPath and callback function
@@ -71,12 +79,10 @@ fs.readdir(directoryPath, function (err, files) {
     }
     //listing all files using forEach
     files.forEach(function (file) {
-        // Do whatever you want to do with the file
-        //   console.log("\007");
-        //  console.log("say " + file);
         // exec("say " + file);
         //  exec('afplay /System/Library/Sounds/Ping.aiff')
         console.log(file);
         debug(file);
     });
-});
+
+})
