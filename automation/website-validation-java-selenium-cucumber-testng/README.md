@@ -8,33 +8,11 @@ This is demo code bootstrap code with basic happy path test automation
 * Reporting of test execution can be found at /target/cucumber-html-reports/overview-features.html
  ![report1](./images/report-pass-fail.png)
 
-## Scenarios
- * 2.1 Sign up the website using a valid email
- * 2.2 Log into the website
- * 2.3   Create first collection
- * 2.3.1 User should be logged in
- * 2.3.2 Press on Explore
-                  
- * 2.3.3 Press the heart icon 
- * 2.4 Advanced search to look for a specific author
- * Verify pictures are displayed
- * Snapshot on a failed test.
- 
-## Improvements: 
-* Random user generator for the registration and login Scenario with external library like java-faker. https://github.com/DiUS/java-faker
-* Create additional classes for dialogs and forms.
-* Shorten xpath locators or avoid completely
-* Move functions from page classes to dedicated helper classes.
-* Dry step definition and no hard coded logic 
-
-## Random issues
- 
-* The advanced search form loses field entries on backend connection failure and does not recover.
-* Test site unresponsive
-![report2](./images/down.png)
-
-
-
+## Scenarios Login: 
+ * 1.0 Login as a test user
+ * 1.1 Login as a test user with false password
+## Scenarios Register: 
+ *  1.0 Register as new user
 ## To Get Started
 
 #### Pre-requisites
@@ -42,10 +20,8 @@ This is demo code bootstrap code with basic happy path test automation
 2. Maven installed in the system
 
 #### Run Scripts
-* For parallel execution right click and run parallel.xml with intellij 
 * For single instance execution right click and run chrome.xml or firefox.xml
-* or run the following maven command
-
+* or run chrome_firefox.xml
 ```
 mvn clean test
 mvn verify -Dcucumber.options="--tags @Regression"
