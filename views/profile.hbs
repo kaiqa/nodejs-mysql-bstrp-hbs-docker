@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -15,21 +16,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="./style.css">
-    
 
-  <title>Document</title>
+
+    <title>Document</title>
 </head>
+
 <body>
-  <nav>
-    <h2>Profile</h2>
-    <ul>
-      <li><a class="btn btn-primary btn-lg" href="/" role="button">Home</a></li>
-    </ul>
-  </nav>
-    <div class="container">
-    <h1>Welcome {{user.name}} you are a {{user.user_type}} user type</h1>
-    <h1> click here to logout <a href="/auth/logout">logout</a></h1>
-  </div>
-  
+    <nav>
+        <h2>Profile</h2>
+        <ul>
+            <li><a class="btn btn-primary btn-lg" href="/" role="button">Home</a></li>
+        </ul>
+    </nav>
+    <h1> click here to ring my <button type="button" class="btn btn-danger" id="btn-bell" href="./profile">bell
+        </button></h1>
+
+    <h1> click here to logout <a class="btn btn-danger" href="./auth/logout" role="button">logout</a></h1>
+    <a class="btn btn-primary btn-lg" href="./auth/logout" role="button">Logout</a>
+    <script>
+        // ring my bell
+        const button = document.getElementById('btn-bell');
+        button.addEventListener('click', function (e) {
+            console.log('bell button was clicked');
+            fetch('/bell',
+                { method: 'POST' })
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log('Bell rang');
+                        return;
+                    }
+                    throw new Error('Bell request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    </script>
+
+
+    </div>
+
 </body>
+
 </html>
