@@ -4,9 +4,9 @@ var pm2 = require('pm2');
 const { app, nativeImage, Tray, Menu, BrowserWindow } = require("electron");
 // var app = require('app');
 const { shell } = require('electron');
- const path = require('path');
-const iconPath = path.join(__dirname,  'icons', 'alien-outlineTemplate.png');
-const scriptPath = path.join(__dirname,  'assets', 'server_start.sh');
+const path = require('path');
+const iconPath = path.join(__dirname, 'icons', 'alien-outlineTemplate.png');
+const scriptPath = path.join(__dirname, 'assets', 'server_start.sh');
 console.log('the path to the icons is: ' + iconPath);
 let top = {}; // prevent gc to keep windows
 let toptwo = {}; // prevent gc to keep windows
@@ -32,7 +32,7 @@ app.once("ready", ev => {
         width: 1124, height: 400 + 410,
         minimizable: true, show: false,
         webPreferences: {
-        nodeIntegration: true
+            nodeIntegration: true
         }
     });
 
@@ -58,6 +58,13 @@ app.once("ready", ev => {
         {
             label: "server", submenu: [
                 {
+                    label: "pm2 restart webapp", click: (item, window, event) => {
+                        pm2.restart('webapp', (err, proc) => {
+                        });
+                    }
+                },
+                { type: "separator" },
+                {
                     label: "pm2 start webapp", click: (item, window, event) => {
                         pm2.start('webapp', (err, proc) => {
                         });
@@ -69,7 +76,7 @@ app.once("ready", ev => {
                         pm2.stop('webapp', (err, proc) => {
                         });
                         pm2.list((err, list) => {
-                        console.log(err, list)
+                            console.log(err, list)
                         })
                         // toptwo.win.show();
                     }
